@@ -1,14 +1,23 @@
-import Image from 'next/image'
+
 import { Inter } from 'next/font/google'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import Heading from '@/components/Heading'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
-  return (
-    <main>
-      <h1>Home Page</h1>
-      <a href='/api/auth/signin'>login</a>
+export default function Index() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
 
-    </main>
+  if (status === 'loading') {
+    return null
+  }
+  return (
+    <div>
+      <Heading />
+      <h1 className='flex justify-center mt-20 text-xl'>Welcome!</h1>
+
+    </div>
   )
 }
